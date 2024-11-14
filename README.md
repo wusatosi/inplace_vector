@@ -44,7 +44,7 @@ TODO: tested platforms.
 
 #### Manual CMake Build
 
-```
+```text
 # Configure build
 $ cmake -S . -B build -DCMAKE_CXX_STANDARD=20
 -- The CXX compiler identification is GNU 11.4.0
