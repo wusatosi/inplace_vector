@@ -16,6 +16,7 @@ project(
 )
 
 include(GNUInstallDirs)
+include(FetchContent)
 
 add_library(beman.inplace_vector INTERFACE)
 target_include_directories(
@@ -44,5 +45,20 @@ install(
 
 if(BUILD_TESTING)
     include(CTest)
+    
+    # Fetch GoogleTest
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG
+            f8d7d77c06936315286eb55f8de22cd23c188571 # release-1.14.0
+        EXCLUDE_FROM_ALL
+    )
+    block()
+        set(INSTALL_GTEST OFF) # Disable GoogleTest installation
+        set(BUILD_TESTING OFF) # Disable GoogleTest tests
+        FetchContent_MakeAvailable(googletest)
+    endblock()
+
     add_subdirectory(src/beman/inplace_vector/tests)
 endif()
